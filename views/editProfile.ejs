@@ -1,0 +1,61 @@
+<%- include('layout/headerAdmin') %>
+
+<div class="container mt-5">
+  <h1 class="mb-4">Edit Profile</h1>
+  <form action="/editProfile" method="POST" class="mb-5">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        value="<%= member.name %>"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="YOB" class="form-label">Year of Birth:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="YOB"
+        name="YOB"
+        value="<%= member.YOB %>"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+  </form>
+
+  <h2 class="mb-4">Change Password</h2>
+  <form action="/changePassword" method="POST">
+    <div class="mb-3">
+      <label for="currentPassword" class="form-label">Current Password:</label>
+      <input
+        type="password"
+        class="form-control"
+        id="currentPassword"
+        name="currentPassword"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="newPassword" class="form-label">New Password:</label>
+      <input
+        type="password"
+        class="form-control"
+        id="newPassword"
+        name="newPassword"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Change Password</button>
+  </form>
+
+  <%- include('layout/footer') %>
+</div>

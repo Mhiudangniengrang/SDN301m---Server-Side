@@ -1,0 +1,55 @@
+<%- include('layout/headerAdmin') %>
+
+<div class="container mt-5">
+  <h3 class="mb-4">Edit Watches</h3>
+
+  <form action="/admin/watches/<%= watch._id %>" method="POST">
+    <div class="mb-3">
+      <label for="watchname" class="form-label">Watch Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="watchname"
+        name="watchName"
+        value="<%= watch.watchName %>"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Image URL</label>
+      <input
+        type="text"
+        class="form-control"
+        id="image"
+        name="image"
+        value="<%= watch.image %>"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input
+        type="text"
+        class="form-control"
+        id="price"
+        name="price"
+        value="<%= watch.price %>"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="brand" class="form-label">Brand</label>
+      <input
+        type="text"
+        class="form-control"
+        id="brand"
+        name="brand"
+        value="<%= watch.brand %>"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Update Watch</button>
+  </form>
+</div>
+
+<%- include('layout/footer') %>

@@ -1,0 +1,88 @@
+<%- include('layout/headerAdmin') %>
+<div class="container mt-5">
+  <h1 class="text-center mt-5">Add New Watch</h1>
+  <form
+    action="/admin/watches"
+    method="POST"
+    class="needs-validation"
+    novalidate
+  >
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="watchName">Watch Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="watchName"
+          name="watchName"
+          required
+        />
+        <div class="invalid-feedback">Please provide a watch name.</div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="image">Image URL</label>
+        <input
+          type="url"
+          class="form-control"
+          id="image"
+          name="image"
+          required
+        />
+        <div class="invalid-feedback">Please provide a valid image URL.</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="price">Price</label>
+        <input
+          type="number"
+          class="form-control"
+          id="price"
+          name="price"
+          min="0"
+          required
+        />
+        <div class="invalid-feedback">Please provide a price.</div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="Automatic"
+            name="Automatic"
+          />
+          <label class="form-check-label" for="Automatic">Automatic</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-12 mb-3">
+        <label for="watchDescription">Description</label>
+        <textarea
+          class="form-control"
+          id="watchDescription"
+          name="watchDescription"
+          rows="3"
+          required
+        ></textarea>
+        <div class="invalid-feedback">Please provide a description.</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="brand">Brand ID</label>
+        <input
+          type="text"
+          class="form-control"
+          id="brand"
+          name="brand"
+          required
+        />
+        <div class="invalid-feedback">Please provide a brand ID.</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Add Watch</button>
+  </form>
+</div>
+<%- include('layout/footer') %>

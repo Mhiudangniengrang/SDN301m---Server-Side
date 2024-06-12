@@ -1,0 +1,21 @@
+<%- include('layout/headerAdmin') %>
+
+<div class="container mt-5">
+  <h3 class="mb-4">Brand</h3>
+  <form action="/admin/brands" method="post">
+    <div class="mb-3">
+      <label for="brandName" class="form-label">Brand Name:</label>
+      <input
+        type="text"
+        class="form-control w-50"
+        id="brandName"
+        name="brandname"
+        placeholder="Enter brand name"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Add Brand</button>
+  </form>
+</div>
+
+<%- include('layout/footer') %>

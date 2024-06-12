@@ -1,0 +1,74 @@
+<%- include('./layout/header') %>
+
+<div class="container w-75 my-4">
+  <div class="row justify-content-center">
+    <div class="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn">
+      <div class="card border-0 shadow my-4">
+        <img src="<%= watches.image %>" alt="..." />
+        <div class="card-body p-1-9 p-xl-5">
+          <div class="mb-4 ">
+            <h3 class="h4 mb-4"><%= watches.watchName %></h3>
+            <div><b>Brand :</b> <%= watches.brand.brandname %></div>
+            <div><b>Price :</b> <%= watches.price %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="ps-lg-1-6 ps-xl-5">
+        <div class="mb-5 wow fadeIn">
+          <div class="text-start mb-1-6 wow fadeIn">
+            <h2 class="h1 mb-0 text-primary">#About This Watch</h2>
+          </div>
+          <p><%= watches.watchDescription %></p>
+        </div>
+        <div class="wow fadeIn">
+          <div class="text-start mb-1-6 wow fadeIn">
+            <h2 class="mb-0 text-primary">#Comments & Ratings</h2>
+          </div>
+          <form
+            action="/watches/<%= watches._id %>/comments"
+            method="POST"
+          >
+            <div class="mb-3">
+              <label for="comment" class="form-label">Comment</label>
+              <textarea
+                class="form-control"
+                id="comment"
+                name="comment"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="rating" class="form-label">Rating</label>
+              <select class="form-select" id="rating" name="rating" required>
+                <option value="1">&#9733;</option>
+                <option value="2">&#9733;&#9733;</option>
+                <option value="3">&#9733;&#9733;&#9733;</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          <hr />
+          <div id="comments-section">
+            <% if (watches.comments && watches.comments.length > 0) { %> <%
+            watches.comments.forEach(comment => { %>
+            <div class="mb-3">
+              <h5><%= comment.author.name %></h5>
+              <% for (let i = 0; i < comment.rating; i++) { %> &#9733; <% } %>
+              <p><%= comment.content %></p>
+            </div>
+            <% }); %> <% } else { %>
+            <p>No comments yet. Be the first to comment!</p>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include ('layout/footer') %>

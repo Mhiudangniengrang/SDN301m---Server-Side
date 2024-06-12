@@ -1,0 +1,125 @@
+<%- include('layout/headerAdmin') %>
+
+<div class="container mt-5">
+  <h3 class="mb-4">Dashboard</h3>
+
+  <!-- List Members -->
+  <h4 class="mb-3">Members</h4>
+  <input type="text" id="memberFilter" placeholder="Search for members.." />
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Member Name</th>
+        <th>Name</th>
+        <th>YOB</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% members.forEach(member => { %>
+      <tr>
+        <td><%= member._id %></td>
+        <td><%= member.membername %></td>
+        <td><%= member.name %></td>
+        <td><%= member.YOB %></td>
+        <td>
+          <a
+            href="/admin/dashboard/members/<%= member._id %>"
+            class="text-danger mx-1"
+          >
+            <i class="fas fa-trash-alt"></i>
+          </a>
+          <!-- Update Member Button -->
+          <a
+            href="/admin/dashboard/members/edit/<%= member._id %>?membername=<%= member.membername %>&name=<%= member.name %>&yob=<%= member.YOB %>"
+            class="text-primary mx-1"
+          >
+            <i class="fas fa-edit"></i>
+          </a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <!-- List Watches -->
+  <h4 class="mb-3">Watches</h4>
+  <input type="text" id="watchFilter" placeholder="Search for watches.." />
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Watch Name</th>
+        <th>Image</th>
+        <th>Price</th>
+        <th>Brand</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% watches.forEach(watch => { %>
+      <tr>
+        <td><%= watch._id %></td>
+        <td><%= watch.watchName %></td>
+        <td>
+          <img
+            src="<%= watch.image %>"
+            alt="<%= watch.watchName %>"
+            style="width: 50px"
+          />
+        </td>
+        <td><%= watch.price %></td>
+        <td><%= watch.brand %></td>
+        <td>
+          <a href="/admin/watches/<%= watch._id %>" class="text-danger mx-1">
+            <i class="fas fa-trash-alt"></i>
+          </a>
+          <!-- Update Watch Button -->
+          <a
+            href="/admin/watches/edit/<%= watch._id %>?watchname=<%= watch.watchName %>&image=<%= watch.image %>&price=<%= watch.price %>&brand=<%= watch.brand %>"
+            class="text-primary mx-1"
+          >
+            <i class="fas fa-edit"></i>
+          </a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <!-- List Brands -->
+  <h4 class="mb-3">Brands</h4>
+  <input type="text" id="brandFilter" placeholder="Search for brands.." />
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Brand Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% brands.forEach(brand => { %>
+      <tr>
+        <td><%= brand._id %></td>
+        <td><%= brand.brandname %></td>
+        <td>
+          <a href="/admin/brands/<%= brand._id %>" class="text-danger mx-1">
+            <i class="fas fa-trash-alt"></i>
+          </a>
+          <!-- Update Brand Button -->
+          <a
+            href="/admin/brands/edit/<%= brand._id %>?brandname=<%= brand.brandname %>"
+            class="text-primary mx-1"
+          >
+            <i class="fas fa-edit"></i>
+          </a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('layout/footer') %>

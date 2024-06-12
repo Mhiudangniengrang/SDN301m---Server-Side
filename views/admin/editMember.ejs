@@ -1,0 +1,44 @@
+<%- include('layout/headerAdmin') %>
+
+<div class="container mt-5">
+  <h3 class="mb-4">Edit Member</h3>
+
+  <form action="/admin/dashboard/members/<%= member._id %>" method="POST">
+    <div class="mb-3">
+      <label for="membername" class="form-label">Member Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="membername"
+        name="membername"
+        value="<%= member.membername %>"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        value="<%= member.name %>"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="yob" class="form-label">Year of Birth</label>
+      <input
+        type="text"
+        class="form-control"
+        id="yob"
+        name="YOB"
+        value="<%= member.YOB %>"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Update Member</button>
+  </form>
+</div>
+
+<%- include('layout/footer') %>
