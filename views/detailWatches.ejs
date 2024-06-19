@@ -3,13 +3,13 @@
 <div class="container w-75 my-4">
   <div class="row justify-content-center">
     <div class="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn">
-      <div class="card border-0 shadow my-4">
+      <div class="card border-0 shadow my-4 ">
         <img src="<%= watches.image %>" alt="..." />
         <div class="card-body p-1-9 p-xl-5">
           <div class="mb-4 ">
             <h3 class="h4 mb-4"><%= watches.watchName %></h3>
             <div><b>Brand :</b> <%= watches.brand.brandname %></div>
-            <div><b>Price :</b> <%= watches.price %></div>
+            <div><b>Price :</b> $<%= watches.price.toLocaleString() %></div>
           </div>
         </div>
       </div>
@@ -46,7 +46,6 @@
                 <option value="1">&#9733;</option>
                 <option value="2">&#9733;&#9733;</option>
                 <option value="3">&#9733;&#9733;&#9733;</option>
-                <!-- Add more options as needed -->
               </select>
             </div>
 

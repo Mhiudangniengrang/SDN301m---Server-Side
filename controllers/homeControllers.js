@@ -1,14 +1,16 @@
-const Comment = require("../model/commentSchema"); // Adjust the path as necessary
+const Comment = require("../model/commentSchema");
 const Brand = require("../model/brandSchema");
-const Member = require("../model/memberSchema"); // Adjust the path as needed
+const Member = require("../model/memberSchema");
 const Watches = require("../model/watchSchema");
+const bcrypt = require("bcrypt");
+
 const getWatchesPage = async (req, res) => {
   const membername = req.cookies.membername || "Guest";
   const { query, brand } = req.query;
   let filter = {};
 
   if (query) {
-    filter.watchName = { $regex: query, $options: "i" }; // Tìm kiếm không phân biệt chữ hoa chữ thường
+    filter.watchName = { $regex: query, $options: "i" };
   }
 
   if (brand) {
@@ -16,8 +18,8 @@ const getWatchesPage = async (req, res) => {
   }
 
   try {
-    const watches = await Watches.find(filter).populate("brand"); // Đảm bảo rằng bạn populate để lấy thông tin brand
-    const brands = await Brand.find(); // Lấy danh sách các nhãn hiệu (brand)
+    const watches = await Watches.find(filter).populate("brand");
+    const brands = await Brand.find();
     res.render("watches", {
       watches,
       brands,
@@ -55,7 +57,7 @@ const detailWatches = async (req, res) => {
 const addComment = async (req, res) => {
   const { id } = req.params;
   const { comment, rating } = req.body;
-  const author = req.cookies.memberId; // Assuming memberId is stored in cookies
+  const author = req.cookies.memberId;
   console.log(`Received watch ID: ${id}`);
 
   try {
@@ -64,19 +66,16 @@ const addComment = async (req, res) => {
       return res.status(404).json({ message: "Watch not found" });
     }
 
-    // Kiểm tra xem thành viên đã đăng bình luận cho đồng hồ này chưa
     const existingComment = await Comment.findOne({ author, watch: id });
     if (existingComment) {
-      return res
-        .status(400)
-        .json({ message: "You have already posted a comment for this watch" });
+      return res.redirect(`/watches/${id}`);
     }
 
     const newComment = new Comment({
       content: comment,
       rating,
       author,
-      watch: watch._id, // Đảm bảo rằng bạn đang truyền đúng id của đồng hồ
+      watch: watch._id,
     });
 
     await newComment.save();
@@ -172,14 +171,12 @@ const changePassword = async (req, res) => {
       return res.status(404).send("Member not found");
     }
 
-    // So sánh mật khẩu hiện tại
     const isMatch = await bcrypt.compare(currentPassword, member.password);
 
     if (!isMatch) {
       return res.status(400).send("Current password is incorrect");
     }
 
-    // Mã hóa mật khẩu mới trước khi lưu
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     member.password = hashedPassword;
     await member.save();

@@ -1,34 +1,39 @@
 <%- include('layout/header') %>
+<style>
+  .price-red {
+    color: red;
+  }
+</style>
 <div class="container mt-5">
-  <h1 class="text-center">Watches</h1>
+  <h1 class="text-center my-4">Watches</h1>
   <!-- Search and Filter Form -->
   <form id="searchForm" class="mb-4" method="GET" action="/watches">
     <div class="container">
-    <div class="row">
-      <div class="col-sm">
-        <input
-          type="text"
-          id="searchInput"
-          name="query"
-          class="form-control"
-          placeholder="Search for watches..."
-          value="<%= typeof query !== 'undefined' ? query : '' %>"
-        />
-      </div>
-      <div class="col-sm">
-        <select id="brandFilter" name="brand" class="form-control">
-          <option value="">All Brands</option>
-          <!-- Loop through your brands and create options -->
-          <% brands.forEach(brand => { %>
-          <option value="<%= brand._id %>" <%= brand._id.toString() === selectedBrand ? 'selected' : '' %>><%= brand.brandname %></option>
-          <% }); %>
-        </select>
-      </div>
-      <div class="col-sm">
-        <button type="submit" class="btn btn-primary ">Search</button>
+      <div class="row">
+        <div class="col-sm">
+          <input
+            type="text"
+            id="searchInput"
+            name="query"
+            class="form-control"
+            placeholder="Search for watches..."
+            value="<%= typeof query !== 'undefined' ? query : '' %>"
+          />
+        </div>
+        <div class="col-sm">
+          <select id="brandFilter" name="brand" class="form-control">
+            <option value="">All Brands</option>
+            <!-- Loop through your brands and create options -->
+            <% brands.forEach(brand => { %>
+            <option value="<%= brand._id %>" <%= brand._id.toString() === selectedBrand ? 'selected' : '' %>><%= brand.brandname %></option>
+            <% }); %>
+          </select>
+        </div>
+        <div class="col-sm">
+          <button type="submit" class="btn btn-primary ">Search</button>
+        </div>
       </div>
     </div>
-  </div>
   </form>
   <div class="row">
     <!-- Loop through your watches and display them -->
@@ -47,9 +52,8 @@
               <i class="fa-solid fa-circle-info"></i>
             </a>
           </div>
-            <p class="card-text"><strong>Brand:</strong> <%= watch.brand.brandname %></p>
-            <p class="card-text"><strong>Price:</strong> <%= watch.price %></p>          
-          <!-- Add more details you want to display -->
+          <p class="card-text mb-3"><strong>Brand:</strong> <%= watch.brand.brandname %></p>
+          <p class="card-text "><strong>Price:</strong> $<%= watch.price.toLocaleString() %></p>
         </div>
       </div>
     </div>

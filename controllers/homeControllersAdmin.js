@@ -78,7 +78,7 @@ const deleteWatch = async (req, res) => {
   try {
     const { id } = req.params;
     await Watches.findByIdAndDelete(id);
-    res.status(200).json({ message: "Watch deleted successfully" });
+    res.redirect("/admin/dashboard");
   } catch (error) {
     console.error("Error deleting watch:", error);
     res.status(500).json({ error: "Server error" });
@@ -120,7 +120,7 @@ const deleteMember = async (req, res) => {
   try {
     const { id } = req.params;
     await Members.findByIdAndDelete(id);
-    res.status(200).json({ message: "Member deleted successfully" });
+    res.redirect("/admin/dashboard");
   } catch (error) {
     console.error("Error deleting member:", error);
     res.status(500).json({ error: "Server error" });
@@ -130,9 +130,9 @@ const deleteMember = async (req, res) => {
 const dashboard = async (req, res) => {
   const membername = req.cookies.membername || "Guest";
   try {
-    const members = await Members.find(); // Assuming you're fetching members to display
-    const watches = await Watches.find(); // Assuming you're fetching watches to display
-    const brands = await Brand.find(); // Assuming you're fetching brands to display
+    const members = await Members.find(); 
+    const watches = await Watches.find(); 
+    const brands = await Brand.find(); 
 
     res.render("admin/dashboard", {
       membername,
@@ -205,21 +205,18 @@ const updateBrand = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
-// Hiển thị trang chỉnh sửa thành viên
 const editMemberPage = async (req, res) => {
   const membername = req.cookies.membername || "Guest";
   const member = await Members.findById(req.params.id);
   res.render("editMember", { member, membername });
 };
 
-// Hiển thị trang chỉnh sửa đồng hồ
 const editWatchPage = async (req, res) => {
   const membername = req.cookies.membername || "Guest";
   const watch = await Watches.findById(req.params.id);
   res.render("editWatches", { watch, membername });
 };
 
-// Hiển thị trang chỉnh sửa nhãn hiệu
 const editBrandPage = async (req, res) => {
   const membername = req.cookies.membername || "Guest";
   const brand = await Brand.findById(req.params.id);
