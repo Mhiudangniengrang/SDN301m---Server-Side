@@ -1,15 +1,27 @@
-import mongoose from 'mongoose';
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
-
-const memberSchema = new mongoose.Schema(
-  {
-    membername: { type: String, required: true },
-    password: { type: String, required: true },
-    name: { type: String, required: true }, 
-    YOB: { type: Number, required: true },
-    isAdmin: { type: Boolean, default: false },
+const memberSchema = new mongoose.Schema({
+  membername: {
+    type: String,
+    required: true,
   },
-  { timestamps: true }
-);
+  password: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  YOB: {
+    type: Number,
+    required: true,
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
+});
 
-export default mongoose.model("Members", memberSchema);
+module.exports = mongoose.model("Members", memberSchema);
